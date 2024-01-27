@@ -7,6 +7,11 @@ export class PreloadedDataHydrator {
     this.id = id;
   }
 
+  // The state object is first converted to a JSON string and then
+  // made safe for HTML to prevent unwanted security risks. After
+  // that, the string is split into chunks and then an array of
+  // HTML elements with no display are returned. These will be passed
+  // to the DOM during hydration.
   chunk(state: unknown): string[] {
     const json = JSON.stringify(state);
     const htmlSafe = json.replace(/&/gi, "&amp;");
@@ -18,6 +23,9 @@ export class PreloadedDataHydrator {
     );
   }
 
+  // After making sure the application is in a browser, the preloaded
+  // data is retrieved (by using the ID), parsed, and then removed
+  // from the DOM so that only the hydrated data remains.
   hydrate<TPreloaded>(): TPreloaded {
     if (typeof window === "undefined" || typeof document === "undefined") {
       throw new Error(
@@ -52,4 +60,8 @@ export class PreloadedDataHydrator {
   }
 }
 
-export const context = new PreloadedDataHydrator(Math.random().toString());
+// Changing the argument from a random number to a static string fixed
+// the issue that was preventing the application from hydrating properly.
+// I believe the issue was that ths server and client were both generating
+// random numbers therefore the client and server had different HTML.
+export const context = new PreloadedDataHydrator("preloadedData");

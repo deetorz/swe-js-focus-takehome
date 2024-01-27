@@ -6,6 +6,8 @@ import { PartySize } from "./PartySize";
 type Controller = {
   title: string;
   isCTAOpen: boolean;
+  // Added partySize to satisfy typing
+  partySize: PartySize;
   openCTA(): void;
   closeCTA(): void;
   renderModal(): JSX.Element;
@@ -34,10 +36,10 @@ export function useController(): Controller {
     },
     renderModal() {
       return (
-        <dialog open={this.isCTAOpen} data-testid="Party Size Modal">
-          <PartySizeList partySize={this.partySize} />
-
-          <button onClick={this.closeCTA}>close</button>
+        // this -> api, avoids complications with 'this'
+        <dialog open={api.isCTAOpen} data-testid="Party Size Modal">
+          <PartySizeList partySize={api.partySize} />
+          <button onClick={api.closeCTA}>close</button>
         </dialog>
       );
     },
