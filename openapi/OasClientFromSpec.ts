@@ -91,7 +91,7 @@ export class OASClientFromSpec {
   buildClientMethodDefinition(schema: PropertyKind[]): FunctionExpressionKind {
     return b.functionExpression(
       null,
-      [b.identifier("producer")],
+      [b.identifier("producer?")],
       b.blockStatement([
         b.variableDeclaration("const", [
           b.variableDeclarator(
@@ -106,7 +106,7 @@ export class OASClientFromSpec {
             b.identifier("result"),
             b.callExpression(b.identifier("produce"), [
               b.identifier("faked"),
-              b.identifier("producer"),
+              b.identifier("producer || (() => {})"),
             ])
           ),
         ]),
