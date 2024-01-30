@@ -21,7 +21,7 @@ export class OASClientFromSpec {
 
     const code = escodegen.generate(program, {
       format: {
-        compact: true,
+        compact: false,
       },
     });
 
