@@ -16,6 +16,59 @@
     }
   ],
   "paths": {
+    "/shops/{id}": {
+      "get": {
+        "summary": "Get a single shop",
+        "responses": {
+          "200": {
+            "description": "All went well",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "slug",
+                    "minNumPeople",
+                    "maxNumPeople",
+                    "showBaby",
+                    "showChild",
+                    "showSenior"
+                  ],
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{id}/menu": {
+      "get": {
+        "summary": "Get a single shop's menu",
+        "responses": {
+          "200": {
+            "description": "All went well",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "title",
+                      "description",
+                      "isGroupOrder",
+                      "minOrderQty",
+                      "maxOrderQty"
+                    ],
+                    "$ref": "#/components/schemas/MenuItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shops/{shop}": {
       "get": {
         "summary": "Get a single shop",
