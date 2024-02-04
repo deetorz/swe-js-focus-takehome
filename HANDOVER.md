@@ -34,3 +34,7 @@ the data I needed, I believe I could have started working on the UI part of the 
 data and try to render the components based off of that. If I am invited to have a code review, I hope to have the UI done by then.
 
 Thank you for the opportunity to interview with TableCheck and the chance to learn some new things with this take home. While it was hard for me, I ultimately enjoyed it very much.
+
+
+## Update 2/4/2024
+I made the decision to use my own dummy data to at least test the logic for the UI. I believe I have set everything up according to the specs in the README. I suppose it is a little hard to be sure without proper testing.
