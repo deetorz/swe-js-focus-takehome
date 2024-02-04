@@ -35,7 +35,7 @@ export class OASClientFromSpec {
         b.literal("immer")
       ),
       b.importDeclaration(
-        [b.importDefaultSpecifier(b.identifier("jsf"))],
+        [b.importSpecifier(b.identifier("JSONSchemaFaker"))],
         b.literal("json-schema-faker")
       ),
     ];
@@ -96,7 +96,7 @@ export class OASClientFromSpec {
         b.variableDeclaration("const", [
           b.variableDeclarator(
             b.identifier("faked"),
-            b.callExpression(b.identifier("jsf.generate"), [
+            b.callExpression(b.identifier("JSONSchemaFaker.generate"), [
               b.objectExpression(schema),
             ])
           ),

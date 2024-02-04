@@ -1,9 +1,9 @@
 import { MenuItem, Shop } from "../../../types";
 
 export class PartySize {
-  private shop: Shop;
+  readonly shop: Shop;
 
-  private menu: MenuItem[];
+  readonly menu: MenuItem[];
 
   constructor(shop: Shop, menu: MenuItem[]) {
     this.shop = shop;

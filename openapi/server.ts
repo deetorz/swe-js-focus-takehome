@@ -27,7 +27,7 @@ export class Server {
       .use(bodyParser.json())
       .use(cors())
       .post("/mock", this.mock.bind(this))
-      .get("/unmock", this.unmock.bind(this))
+      .post("/unmock", this.unmock.bind(this))
       .get("/teardown", this.teardown.bind(this))
       .use("*", this.handler.bind(this));
   }

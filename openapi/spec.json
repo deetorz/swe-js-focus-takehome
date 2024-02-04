@@ -96,25 +96,22 @@
     },
     "/shops/{shop}/menu": {
       "get": {
-        "summary": "Get a single shop's menu",
+        "summary": "Get a single menu item",
         "responses": {
           "200": {
             "description": "All went well",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "id",
-                      "title",
-                      "description",
-                      "isGroupOrder",
-                      "minOrderQty",
-                      "maxOrderQty"
-                    ],
-                    "$ref": "#/components/schemas/MenuItem"
-                  }
+                  "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "isGroupOrder",
+                    "minOrderQty",
+                    "maxOrderQty"
+                  ],
+                  "$ref": "#/components/schemas/MenuItem"
                 }
               }
             }
