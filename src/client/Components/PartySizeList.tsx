@@ -40,8 +40,12 @@ export const PartySizeList = ({ partySize }: Props): JSX.Element => {
 
   const shop: Shop = partySize.shop;
   const menu: Array<MenuItem> = partySize.menu;
-  const [maxNum, setMaxNum] = useState<number>(partySize.shop.maxNumPeople);
-  const [_minNum, setMinNum] = useState<number>(partySize.shop.minNumPeople);
+  const [maxNum, setMaxNum] = useState<number>(
+    partySize.shop.maxNumPeople ? partySize.shop.maxNumPeople : 10
+  );
+  const [_minNum, setMinNum] = useState<number>(
+    partySize.shop.minNumPeople ? partySize.shop.minNumPeople : 1
+  );
   const [adultCount, setAdultCount] = useState<number>(0);
   const [childrenCount, setChildrenCount] = useState<number>(0);
   const [babiesCount, setBabiesCount] = useState<number>(0);
