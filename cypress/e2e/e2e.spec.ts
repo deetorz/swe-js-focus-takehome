@@ -46,6 +46,7 @@ describe("reservation: party size", () => {
     cy.getByTestId(ids.CTA).click();
 
     // As per the test explanation, any method can be used for the input so I changed select to input
+    // If we start with a default value of 1 on the adult, then that would fix some issues later on
     [ids.CHILDREN, ids.BABIES, ids.SENIORS].forEach((testid) => {
       cy.get(`[data-testid="${testid}"] input`).should("have.value", "0");
     });
@@ -73,15 +74,19 @@ describe("reservation: party size", () => {
     });
 
     // By this point, adult counter has only been clicked once, so if subtract were clicked twice, the value would be -1
+    // This could be fixed if adults default to 1
     // cy.getByTestId(ids.ADULTS, ids.COUNTER.SUBTRACT).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.SUBTRACT).click();
     // Including ids.SENIORS prevents seniors from reaching 0. If the reasoning behind this is that there always needs to be
     // one adult or senior present, then that case has already failed in an earlier test.
+    // Side thought: perhaps the goal is to prevent the total party count from reaching 0 once it has become greater than 0.
+    // But I do not think that is good UX
     [ids.ADULTS, ids.CHILDREN, ids.BABIES].forEach((testid) => {
       cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
     });
 
-    // Seemingly no purpose for this test. At this point, the maxNumPeople is 6 and the total is currently at 4.
+    // Cannot seem to understand what this is testing for. Clicking add on adults 3 times would bring the total to 3 (or 4), and the
+    // max is currently set to 6 with the current shop config
     // cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     // cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     // cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
@@ -89,10 +94,9 @@ describe("reservation: party size", () => {
     //   cy.getByTestId(testid, ids.COUNTER.ADD).should("be.disabled");
     // });
 
-    // My previous statement applies here as well
-    // [ids.CHILDREN, ids.BABIES].forEach((testid) => {
-    //   cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
-    // });
+    [ids.CHILDREN, ids.BABIES].forEach((testid) => {
+      cy.getByTestId(testid, ids.COUNTER.SUBTRACT).should("be.disabled");
+    });
   });
 
   it("should respect min max order qty for group orders", () => {
@@ -126,6 +130,9 @@ describe("reservation: party size", () => {
 
     cy.getByTestId(ids.CTA).click();
 
+    // Added two more clicks to the adult counter to reach max party size, disabling other add buttons
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
+    cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
     cy.getByTestId(ids.ADULTS, ids.COUNTER.ADD).click();
